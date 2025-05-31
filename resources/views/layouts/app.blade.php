@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>Sistem Management Klinik</title>
@@ -97,6 +98,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -104,7 +106,7 @@
         <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard*') ? 'active' : '' }}">
             <i class="fas fa-border-all"></i> Dashboard
         </a>
-        <a href="{{ route('pasien') }}" class="{{ Request::is('pasien*') ? 'active' : '' }}">
+        <a href="{{ route('pasiens.index') }}" class="{{ Request::is('pasien*') ? 'active' : '' }}">
             <i class="fas fa-users"></i> Data Pasien
         </a>
         <a href="{{ route('dokter') }}" class="{{ Request::is('dokter*') ? 'active' : '' }}">
@@ -124,9 +126,13 @@
         <div class="navbar">
             <div class="user-info">
                 Hai, Admin |
-               <a href="#">
-        <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Logout
-    </a>
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">
+                        <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Logout
+                    </button>
+                </form>
+
             </div>
         </div>
 
@@ -136,4 +142,5 @@
         </div>
     </div>
 </body>
+
 </html>

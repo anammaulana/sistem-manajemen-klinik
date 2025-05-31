@@ -60,13 +60,44 @@
 
 <div class="login-box">
     <h2>Login</h2>
-    {{-- <form method="POST" action="{{ route('login') }}"> --}}
-        {{-- @csrf --}}
-        <input type="text" name="username" placeholder="Username" required>
+
+    @if (session('success'))
+    <div style="color: green;">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div style="color: red;">
+        {{ session('error') }}
+    </div>
+@endif
+
+
+    {{-- Tampilkan pesan error --}}
+    @if ($errors->any())
+        <div style="color: red;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+        <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required>
         <input type="password" name="password" placeholder="Password" required>
+
         <button type="submit">Login</button>
-    {{-- </form> --}}
+    </form>
+    <p style="margin-top: 10px;">
+        Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a>
+    </p>
 </div>
+
 
 </body>
 </html>

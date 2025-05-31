@@ -1,14 +1,39 @@
 <?php
 
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PemeriksaanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::get('register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login')->with('success', 'Berhasil logout');
+})->name('logout');
+
+Route::resource('pasiens', PasienController::class);
+Route::resource('dokters', DokterController::class);
+Route::resource('obats', ObatController::class);
+Route::resource('pemeriksaans', PemeriksaanController::class);
+
+
+// Route::get('/login', function () {
+//     return view('auth.login');
+// });
 
 
 Route::get('/dashboard', function () {
@@ -16,13 +41,13 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('/pasien', function () {
-    return view('pasien.index');
-})->name('pasien');
+// Route::get('/pasien', function () {
+//     return view('pasiens.index');
+// })->name('pasien');
 
-Route::get('/pasien-create', function () {
-    return view('pasien.create');
-})->name('pasien.create');
+// Route::get('/pasien-create', function () {
+//     return view('pasien.create');
+// })->name('pasien.create');
 
 Route::get('/pasien-edit', function () {
     return view('pasien.edit');
