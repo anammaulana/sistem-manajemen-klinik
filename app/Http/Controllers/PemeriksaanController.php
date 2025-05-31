@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokter;
+use App\Models\Obat;
+use App\Models\Pasien;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 
@@ -25,8 +28,11 @@ class PemeriksaanController extends Controller
      */
     public function create()
     {
+        $dokters = Dokter::all();
+        $pasiens = Pasien::all();
+    
         // Return the view to create a new pemeriksaan
-        return view('pemeriksaan.create');
+        return view('pemeriksaan.create', compact('dokters', 'pasiens'));
     }
 
     /**
@@ -37,28 +43,29 @@ class PemeriksaanController extends Controller
         // Validate and create a new pemeriksaan
         $validatedData = $request->validate([
             'id_pemeriksaan' => 'required|string|max:255|unique:pemeriksaans,id_pemeriksaan',
-            'id_pasien' => 'required|string|max:255',
-            'id_dokter' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'id_pasien' => 'required|string|max:255|',
+            'id_dokter' => 'required|string|max:255|',
+            'resep_obat' => 'required|string|max:255',
+            'tanggal_periksa' => 'required|date',
             'keluhan' => 'required|string|max:255',
+            'diagnosa' => 'nullable|string|max:255',
         ]);
-
+        // dd($validatedData);
         Pemeriksaan::create($validatedData);
+        
 
-        return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil ditambahkan.');
+        return redirect()->route('pemeriksaans.index')->with('success', 'Pemeriksaan berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        // Fetch the pemeriksaan by ID
-        $pemeriksaan = Pemeriksaan::findOrFail($id);
-
-        // Return the view with the pemeriksaan details
-        return view('pemeriksaan.show', compact('pemeriksaan'));
+        $pemeriksaan = Pemeriksaan::with(['dokter', 'pasien'])->findOrFail($id);
+        return view('pemeriksaan.detail', compact('pemeriksaan'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -66,10 +73,12 @@ class PemeriksaanController extends Controller
     public function edit(string $id)
     {
         // Fetch the pemeriksaan by ID
+        $dokters = Dokter::all();
+        $pasiens = Pasien::all();
         $pemeriksaan = Pemeriksaan::findOrFail($id);
 
         // Return the view with the pemeriksaan data
-        return view('pemeriksaan.edit', compact('pemeriksaan'));
+        return view('pemeriksaan.edit', compact('pemeriksaan', 'dokters', 'pasiens'));
     }
 
     /**
@@ -83,15 +92,18 @@ class PemeriksaanController extends Controller
         // Validate and update the pemeriksaan
         $validatedData = $request->validate([
             'id_pemeriksaan' => 'required|string|max:255|unique:pemeriksaans,id_pemeriksaan,' . $pemeriksaan->id_pemeriksaan . ',id_pemeriksaan',
+            'resep_obat' => 'required|string|max:255',
             'id_pasien' => 'required|string|max:255',
             'id_dokter' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'tanggal_periksa' => 'required|date',
             'keluhan' => 'required|string|max:255',
+            'diagnosa' => 'nullable|string|max:255',
         ]);
-
+        // dd($validatedData);
         $pemeriksaan->update($validatedData);
+        
 
-        return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil diupdate.');
+        return redirect()->route('pemeriksaans.index')->with('success', 'Pemeriksaan berhasil diupdate.');
     }
 
     /**

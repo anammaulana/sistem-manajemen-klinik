@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('spesialisasi');
             $table->string('no_str')->unique();
-            $table->string('jadwal_praktik');
+            $table->string('jadwal_praktik')->nullable();
             $table->timestamps();
         });
     }

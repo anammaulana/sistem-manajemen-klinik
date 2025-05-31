@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('id_pemeriksaan')->primary();
             $table->string('id_pasien')->constrained('pasiens')->onDelete('cascade');
             $table->string('id_dokter')->constrained('dokters')->onDelete('cascade');
-            $table->date('tanggal_periksa');
-            $table->text('keluhan');
+            $table->date('tanggal_periksa')->nullable();
+            $table->text('keluhan')->nullable();
             $table->text('diagnosa')->nullable();
             $table->text('resep_obat')->nullable();
             $table->timestamps();
