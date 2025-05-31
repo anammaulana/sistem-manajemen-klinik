@@ -103,19 +103,19 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h3>Sistem Management Klinik</h3>
-        <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard*') ? 'active' : '' }}">
+        <a href="{{ route('dashboard.index') }}" class="{{ Request::is('dashboard*') ? 'active' : '' }}">
             <i class="fas fa-border-all"></i> Dashboard
         </a>
         <a href="{{ route('pasiens.index') }}" class="{{ Request::is('pasien*') ? 'active' : '' }}">
             <i class="fas fa-users"></i> Data Pasien
         </a>
-        <a href="{{ route('dokter') }}" class="{{ Request::is('dokter*') ? 'active' : '' }}">
+        <a href="{{ route('dokters.index') }}" class="{{ Request::is('dokter*') ? 'active' : '' }}">
             <i class="fas fa-user-md"></i> Data Dokter
         </a>
-        <a href="{{ route('pemeriksaan') }}" class="{{ Request::is('pemeriksaan*') ? 'active' : '' }}">
+        <a href="{{ route('pemeriksaans.index') }}" class="{{ Request::is('pemeriksaan*') ? 'active' : '' }}">
             <i class="fas fa-clipboard-list"></i> Pemeriksaan
         </a>
-        <a href="{{ route('obat') }}" class="{{ Request::is('obat*') ? 'active' : '' }}">
+        <a href="{{ route('obats.index') }}" class="{{ Request::is('obat*') ? 'active' : '' }}">
             <i class="fas fa-pills"></i> Data Obat
         </a>
     </div>

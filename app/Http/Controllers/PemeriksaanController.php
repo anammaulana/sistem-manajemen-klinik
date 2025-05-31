@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 
 class PemeriksaanController extends Controller
@@ -11,7 +12,12 @@ class PemeriksaanController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch all pemeriksaan records from the database
+        // Assuming you have a Pemeriksaan model
+        $pemeriksaans = Pemeriksaan::all();
+
+        // Return the view with the list of pemeriksaan
+        return view('pemeriksaan.index', compact('pemeriksaans'));
     }
 
     /**
@@ -19,7 +25,8 @@ class PemeriksaanController extends Controller
      */
     public function create()
     {
-        //
+        // Return the view to create a new pemeriksaan
+        return view('pemeriksaan.create');
     }
 
     /**
@@ -27,7 +34,18 @@ class PemeriksaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate and create a new pemeriksaan
+        $validatedData = $request->validate([
+            'id_pemeriksaan' => 'required|string|max:255|unique:pemeriksaans,id_pemeriksaan',
+            'id_pasien' => 'required|string|max:255',
+            'id_dokter' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'keluhan' => 'required|string|max:255',
+        ]);
+
+        Pemeriksaan::create($validatedData);
+
+        return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil ditambahkan.');
     }
 
     /**
@@ -35,7 +53,11 @@ class PemeriksaanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Fetch the pemeriksaan by ID
+        $pemeriksaan = Pemeriksaan::findOrFail($id);
+
+        // Return the view with the pemeriksaan details
+        return view('pemeriksaan.show', compact('pemeriksaan'));
     }
 
     /**
@@ -43,7 +65,11 @@ class PemeriksaanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Fetch the pemeriksaan by ID
+        $pemeriksaan = Pemeriksaan::findOrFail($id);
+
+        // Return the view with the pemeriksaan data
+        return view('pemeriksaan.edit', compact('pemeriksaan'));
     }
 
     /**
@@ -51,7 +77,21 @@ class PemeriksaanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Fetch the pemeriksaan by ID
+        $pemeriksaan = Pemeriksaan::findOrFail($id);
+
+        // Validate and update the pemeriksaan
+        $validatedData = $request->validate([
+            'id_pemeriksaan' => 'required|string|max:255|unique:pemeriksaans,id_pemeriksaan,' . $pemeriksaan->id_pemeriksaan . ',id_pemeriksaan',
+            'id_pasien' => 'required|string|max:255',
+            'id_dokter' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'keluhan' => 'required|string|max:255',
+        ]);
+
+        $pemeriksaan->update($validatedData);
+
+        return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil diupdate.');
     }
 
     /**
@@ -59,6 +99,12 @@ class PemeriksaanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Fetch the pemeriksaan by ID
+        $pemeriksaan = Pemeriksaan::findOrFail($id);
+
+        // Delete the pemeriksaan
+        $pemeriksaan->delete();
+
+        return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil dihapus.');
     }
 }

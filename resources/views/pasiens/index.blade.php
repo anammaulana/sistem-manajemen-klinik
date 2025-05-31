@@ -39,10 +39,10 @@
                         <td style="padding: 10px; text-align: center;">{{ $pasien->jenis_kelamin }}</td>
                         <td style="padding: 10px; text-align: center;">{{ $pasien->no_telepon }}</td>
                         <td style="padding: 10px; text-align: center;">
+                            <a href="{{ route('pasiens.show', $pasien->id_pasien) }}"><i class="fas fa-eye"
+                            style="margin-left: 10px; color:blue;"></i></a>
                             <a href="{{ route('pasiens.edit', $pasien->id_pasien) }}"><i class="fas fa-edit"
                                     style="margin-left: 10px; color: #e6a100;"></i></a>
-                            <a href="{{ route('pasiens.show', $pasien->id_pasien) }}"><i class="fas fa-eye"
-                                    style="margin-left: 10px; color:blue;"></i></a>
                             <form action="{{ route('pasiens.destroy', $pasien->id_pasien) }}" method="POST"
                                 style="display:inline;" onsubmit="return confirm('Hapus data ini?')">
                                 @csrf
@@ -59,18 +59,6 @@
                         <td colspan="7">Belum ada data pasien.</td>
                     </tr>
                 @endforelse
-                <!-- <tr>
-                            <td style="padding: 10px; text-align: center;">1</td>
-                            <td style="padding: 10px; text-align: center;">Budi Santoso</td>
-                            <td style="padding: 10px; text-align: center;">34</td>
-                            <td style="padding: 10px; text-align: center;">Laki-laki</td>
-                             <td style="padding: 10px; text-align: center;">
-                                <a href="{{route("pasien.detail")}}"><i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i></a>
-                                <a href="{{route("pasien.edit")}}"><i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i></a>
-                                <a href="#"><i class="fas fa-trash-alt" style="margin-left: 10px; color: red;"></i></a>
-                            </td>
-                        </tr> -->
-                <!-- Tambahkan data lainnya -->
             </tbody>
         </table>
     </div>
