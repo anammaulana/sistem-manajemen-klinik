@@ -11,10 +11,10 @@ class Pasien extends Model
      *
      * @var string
      */
-    protected $table = 'pasiens';
-    protected $primaryKey = 'id_pasien';
-    public $incrementing = false; // jika ID diinput manual, seperti 'anam'
-    protected $keyType = 'string'; // jika ID bukan integer
+    protected $table = 'PASIENS'; // kalau nama tabelnya pakai huruf besar atau beda
+    protected $primaryKey = 'id_pasien';  // sesuaikan dengan nama kolom pk-mu
+    public $incrementing = false; // kalau primary key bukan auto increment
+    protected $keyType = 'string'; // kalau pk bertipe string (bukan integer)
 
     protected $fillable = [
         'id_pasien',

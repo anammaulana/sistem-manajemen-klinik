@@ -48,7 +48,7 @@ class PasienController extends Controller
     public function update(Request $request, Pasien $pasien)
     {
         $request->validate([
-            'id_pasien' => 'required|unique:pasiens,id_pasien,' . $pasien->id_pasien,
+            'id_pasien' => 'required|unique:pasiens,id_pasien,' . $pasien->id_pasien . ',id_pasien',
             'nama' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
