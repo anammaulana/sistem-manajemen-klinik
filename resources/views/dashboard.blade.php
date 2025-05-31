@@ -65,18 +65,35 @@
                 </tr>
             </thead>
             <tbody>
+            @forelse ($dokters as $index => $dokter)
                 <tr>
-                    <td style="padding: 10px; text-align: center;">1</td>
-                    <td style="padding: 10px; text-align: center;">Budi Santoso</td>
-                    <td style="padding: 10px; text-align: center;">34</td>
-                    <td style="padding: 10px; text-align: center;">Laki-laki</td>
+                    <td style="padding: 10px; text-align: center;">{{ $index + 1 }}</td>
+                    <td style="padding: 10px; text-align: center;">{{ $dokter->nama }}</td>
+                    <td style="padding: 10px; text-align: center;">{{ $dokter->id_dokter }}</td>
+                    <td style="padding: 10px; text-align: center;">{{ $dokter->jadwal_praktik }}</td>
+                    <!-- <td style="padding: 10px; text-align: center;">{{ $dokter->spesialisasi }}</td> -->
                     <td style="padding: 10px; text-align: center;">
-                        <a href="#"><i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i></a>
-                        <a href="#"><i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i></a>
-                        <a href="#"><i class="fas fa-trash-alt" style="margin-left: 10px; color: red;"></i></a>
+                        <a href="{{ route('dokters.show', $dokter->id_dokter) }}">
+                            <i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i>
+                        </a>
+                        <a href="{{ route('dokters.edit', $dokter->id_dokter) }}">
+                            <i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i>
+                        </a>
+                        <form action="{{ route('dokters.destroy', $dokter->id_dokter) }}" method="POST" style="display:inline;"
+                            onsubmit="return confirm('Hapus data ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <i class="fas fa-trash-alt" style="margin-left: 10px; color: red;"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
-                <!-- Tambahkan data lainnya -->
+            @empty
+                <tr>
+                    <td colspan="7">Belum ada data dokter.</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
     </div>

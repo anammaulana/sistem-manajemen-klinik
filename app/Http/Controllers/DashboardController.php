@@ -19,8 +19,10 @@ class DashboardController extends Controller
         $totalObat = Obat::count();
         $totalPemeriksaan = Pemeriksaan::count();
         $totalDokter = Dokter::count();
+        // Fetch all doctors from the database
+        $dokters = Dokter::all();
 
-        return view('dashboard', compact('totalPasien', 'totalObat', 'totalPemeriksaan', 'totalDokter'));
+        return view('dashboard', compact('totalPasien', 'totalObat', 'totalPemeriksaan', 'totalDokter', 'dokters'));
     }
 
     /**
