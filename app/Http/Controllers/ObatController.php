@@ -51,7 +51,7 @@ public function index(Request $request)
 
         Obat::create($validatedData);
 
-        return redirect()->route('obat.index')->with('success', 'Obat berhasil ditambahkan.');
+        return redirect()->route('obats.index')->with('success', 'Obat berhasil ditambahkan.');
     }
 
     /**
@@ -63,7 +63,7 @@ public function index(Request $request)
         $obat = Obat::findOrFail($id);
 
         // Return the view with the medicine details
-        return view('obat.show', compact('obat'));
+        return view('obat.detail', compact('obat'));
     }
 
     /**
@@ -88,7 +88,7 @@ public function index(Request $request)
 
         // Validate and update the medicine data
         $validatedData = $request->validate([
-            'id_obat' => 'required|string|max:255|unique:obats,id_obat,' . $obat->id_obat,
+            'id_obat' => 'required|string|max:255|unique:obats,id_obat,' . $obat->id_obat . ',id_obat',
             'nama_obat' => 'required|string|max:255',
             'dosis' => 'required|string|max:255',
             'stok' => 'required|integer|min:0',
@@ -96,7 +96,7 @@ public function index(Request $request)
 
         $obat->update($validatedData);
 
-        return redirect()->route('obat.index')->with('success', 'Obat berhasil diperbarui.');
+        return redirect()->route('obats.index')->with('success', 'Obat berhasil diperbarui.');
     }
 
     /**
@@ -110,6 +110,6 @@ public function index(Request $request)
         // Delete the medicine
         $obat->delete();
 
-        return redirect()->route('obat.index')->with('success', 'Obat berhasil dihapus.');
+        return redirect()->route('obats.index')->with('success', 'Obat berhasil dihapus.');
     }
 }

@@ -41,9 +41,9 @@
                 <td style="padding: 10px; text-align: center;">{{$obat->stok}}</td>
                 <td style="padding: 10px; text-align: center;">{{$obat->dosis}}</td>
                  <td style="padding: 10px; text-align: center;">
-                    <a href="{{route('obats.show')}}"><i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i></a>
-                    <a href="{{route('obats.edit')}}"><i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i></a>
-                     <form action="{{ route('obats.destroy', $dokter->id_dokter) }}" method="POST" style="display:inline;"
+                    <a href="{{route('obats.show', $obat->id_obat)}}"><i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i></a>
+                    <a href="{{route('obats.edit', $obat->id_obat)}}"><i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i></a>
+                     <form action="{{ route('obats.destroy', $obat->id_obat) }}" method="POST" style="display:inline;"
                                 onsubmit="return confirm('Hapus data ini?')">
                                 @csrf
                                 @method('DELETE')

@@ -39,7 +39,7 @@
             <!-- Kolom Kanan -->
             <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
                 <div>
-                    <label for="nama_obat" style="font-weight: 300; margin-bottom: 6px; display: block;">Stok</label>
+                    <label for="nama_obat" style="font-weight: 300; margin-bottom: 6px; display: block;">Nama Obat</label>
                     <input type="text" name="nama_obat" id="nama_obat" class="form-control"
                         style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"
                          value="{{ old('nama_obat')}}"  />

@@ -8,7 +8,7 @@
         <p style="color: #555;">Form Edit Obat</p>
     </div>
 
-   <form action="{{ route('obats.update', $dokter->id_dokter) }}" method="POST">
+   <form action="{{ route('obats.update', $obat->id_obat) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -17,9 +17,9 @@
             <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
              <div>
                 <label for="id_obat" style="font-weight: 300; margin-bottom: 6px; display: block;">No. Obat</label>
-                <input type="text" name="id_obat" id="id_obat" class="form-control"
+                <input type="text" readonly name="id_obat" id="id_obat" class="form-control"
                     style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" 
-                    value="{{ old('id_dokter', $obat->id_obat) }}"/>
+                    value="{{ old('id_obat', $obat->id_obat) }}"/>
             </div>
 
               <div>
