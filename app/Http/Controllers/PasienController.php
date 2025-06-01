@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 
 class PasienController extends Controller
 {
-    public function index()
-    {
-        $pasiens = Pasien::all();
-        return view('pasiens.index', compact('pasiens'));
+ public function index(Request $request)
+{
+    $query = Pasien::query();
+
+    if ($request->has('search') && $request->search != '') {
+        $query->where('nama', 'like', '%' . $request->search . '%');
     }
+
+    $pasiens = $query->get();
+
+    return view('pasiens.index', compact('pasiens'));
+}
 
     public function create()
     {

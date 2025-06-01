@@ -13,15 +13,22 @@ class PemeriksaanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Fetch all pemeriksaan records from the database
-        // Assuming you have a Pemeriksaan model
-        $pemeriksaans = Pemeriksaan::all();
+public function index(Request $request)
+{
+    $query = Pemeriksaan::query();
 
-        // Return the view with the list of pemeriksaan
-        return view('pemeriksaan.index', compact('pemeriksaans'));
+    if ($request->has('search') && $request->search != '') {
+        $search = $request->search;
+
+        $query->whereHas('pasien', function ($q) use ($search) {
+            $q->where('nama', 'like', '%' . $search . '%');
+        });
     }
+
+    $pemeriksaans = $query->get();
+
+    return view('pemeriksaan.index', compact('pemeriksaans'));
+}
 
     /**
      * Show the form for creating a new resource.

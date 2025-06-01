@@ -10,8 +10,13 @@
                 <p>List data pemeriksaan.</p>
             </div>
             <div style="display: flex; gap: 10px;">
-                <input type="text" placeholder="Cari riwayat pemeriksaan..."
-                    style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
+                <form method="GET" action="{{ route('pemeriksaans.index') }}" style="margin-bottom: 20px; display: flex; gap: 10px;">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama pasien..."
+        style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
+    <button type="submit" style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
+        Cari
+    </button>
+</form>
                 <a href="{{ route('pemeriksaans.create') }}"
                     style="padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
                     Tambah

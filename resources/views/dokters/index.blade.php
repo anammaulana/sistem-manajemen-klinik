@@ -9,10 +9,16 @@
                 <p>List data dokter.</p>
             </div>
            <div style="display: flex; gap: 10px;">
-                <input type="text" placeholder="Cari dokter..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
-                <a href="{{ route('dokters.create') }}" style="padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
-                     Tambah
+               <form method="GET" action="{{ route('dokters.index') }}" style="display: flex; gap: 10px;">
+                <input type="text" name="search" placeholder="Cari dokter..." value="{{ request('search') }}"
+                    style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
+                <button type="submit" style="padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
+                    Cari
+                </button>
+                <a href="{{ route('dokters.create') }}" style="padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">
+                    Tambah
                 </a>
+            </form>
             </div>
         </div>
 

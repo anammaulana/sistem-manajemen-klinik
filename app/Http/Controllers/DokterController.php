@@ -10,14 +10,19 @@ class DokterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Fetch all doctors from the database
-        $dokters = Dokter::all();
+    public function index(Request $request)
+{
+    $query = Dokter::query();
 
-        // Return the view with the list of doctors
-        return view('dokters.index', compact('dokters'));
+    if ($request->has('search') && $request->search != '') {
+        $query->where('nama', 'like', '%' . $request->search . '%');
     }
+
+    $dokters = $query->get();
+
+    return view('dokters.index', compact('dokters'));
+}
+
 
     /**
      * Show the form for creating a new resource.

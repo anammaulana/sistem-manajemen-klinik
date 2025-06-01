@@ -10,14 +10,22 @@ class ObatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Fetch all medicines from the database
-        $obats = Obat::all();
+public function index(Request $request)
+{
+    // Ambil query builder Obat
+    $query = Obat::query();
 
-        // Return the view with the list of medicines
-        return view('obat.index', compact('obats'));
+    // Jika ada parameter pencarian, filter berdasarkan nama_obat
+    if ($request->has('search') && $request->search != '') {
+        $query->where('nama_obat', 'like', '%' . $request->search . '%');
     }
+
+    // Ambil hasil
+    $obats = $query->get();
+
+    // Kirim data ke view
+    return view('obat.index', compact('obats'));
+}
 
     /**
      * Show the form for creating a new resource.
