@@ -21,13 +21,15 @@ class AuthController extends Controller
         'name' => 'required|string|max:255',
         'username' => 'required|string|max:255|unique:users,username',
         'password' => 'required|string|min:6|confirmed',
+        'role' => 'required|in:admin,staff,dokter',
+
     ]);
 
     User::create([
         'name' => $request->name,
         'username' => $request->username,
         'password' => Hash::make($request->password),
-        'role' => 'user', // Atur role default sebagai user
+        'role' => $request->role,
     ]);
 
     return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');

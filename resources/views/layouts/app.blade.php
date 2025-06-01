@@ -125,7 +125,7 @@
         <!-- Navbar -->
         <div class="navbar">
             <div class="user-info">
-                Hai, Admin |
+            Hai, {{ Auth::user()->name }} {{ Auth::user()->role == 'admin' ? 'Admin' : (Auth::user()->role == 'staff' ? 'Staff' : '') }} | {{ Auth::user()->role == 'dokter' ? 'Dokter' : '' }}
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
                     <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">

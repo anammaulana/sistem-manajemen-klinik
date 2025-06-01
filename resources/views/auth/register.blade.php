@@ -100,8 +100,10 @@
             <!-- <input type="text" name="role" placeholder="Role (admin/user)" value="{{ old('role') }}" required> -->
             <select name="role" required class="custom-select">
                 <option value="" disabled selected>Pilih Role</option>
-                <option value="user">User</option>
+                <!-- <option value="user">User</option> -->
                 <option value="admin">Admin</option>
+                <option value="staff">Staff</option>
+                <option value="dokter">Dokter</option>
             </select>
 
             <button type="submit">Register</button>
