@@ -46,7 +46,7 @@
                                 onsubmit="return confirm('Hapus data ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit">
+                                <button type="submit" style="outline: none; border: none; background: none; cursor: pointer;">
                                     <i class="fas fa-trash-alt" style="margin-left: 10px; color: red;"></i>
                                 </button>
                             </form>

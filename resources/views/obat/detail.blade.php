@@ -12,31 +12,27 @@
         <div style="display: flex; gap: 40px;">
             <!-- Kolom Kiri -->
             <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-             <div>
-                <label for="no_dokter" style="font-weight: 300; margin-bottom: 6px; display: block;">No. Obat</label>
-                <input type="text" name="no_dokter" id="no_dokter" class="form-control"
-                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
-            </div>
+           <div>
+                    <label style="font-weight: 600; color: #333;">No. Obat</label>
+                    <p style="margin: 6px 0 0; padding: 10px; background: #f9f9f9; border-radius: 8px; border: 1px solid #ccc;">{{ $obats->id_obat }}</p>
+                </div>
 
-              <div>
-                    <label for="nama_lengkap" style="font-weight: 300; margin-bottom: 6px; display: block;">Stok</label>
-                    <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
-                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+             <div>
+                    <label style="font-weight: 600; color: #333;">Stok</label>
+                    <p style="margin: 6px 0 0; padding: 10px; background: #f9f9f9; border-radius: 8px; border: 1px solid #ccc;">{{ $obats->stok }}</p>
                 </div>
         
             </div>
 
             <!-- Kolom Kanan -->
             <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                <div>
-                    <label for="nama_lengkap" style="font-weight: 300; margin-bottom: 6px; display: block;">Nama Obat</label>
-                    <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
-                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+            <div>
+                    <label style="font-weight: 600; color: #333;">Nama Obat</label>
+                    <p style="margin: 6px 0 0; padding: 10px; background: #f9f9f9; border-radius: 8px; border: 1px solid #ccc;">{{ $obats->nama_obat }}</p>
                 </div>
                 <div>
-                    <label for="no_str" style="font-weight: 300; margin-bottom: 6px; display: block;">Dosis</label>
-                    <input type="text" name="no_str" id="no_str" class="form-control"
-                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+                    <label style="font-weight: 600; color: #333;">Dosis</label>
+                    <p style="margin: 6px 0 0; padding: 10px; background: #f9f9f9; border-radius: 8px; border: 1px solid #ccc;">{{ $obats->dosis }}</p>
                 </div>
             </div>
         </div>

@@ -36,10 +36,9 @@ class ObatController extends Controller
         // Validate and create a new medicine
         $validatedData = $request->validate([
             'id_obat' => 'required|string|max:255|unique:obats,id_obat',
-            'nama' => 'required|string|max:255',
-            'jenis' => 'required|string|max:255',
+            'nama_obat' => 'required|string|max:255',
+            'dosis' => 'required|string|max:255',
             'stok' => 'required|integer|min:0',
-            'harga' => 'required|numeric|min:0',
         ]);
 
         Obat::create($validatedData);
@@ -82,10 +81,9 @@ class ObatController extends Controller
         // Validate and update the medicine data
         $validatedData = $request->validate([
             'id_obat' => 'required|string|max:255|unique:obats,id_obat,' . $obat->id_obat,
-            'nama' => 'required|string|max:255',
-            'jenis' => 'required|string|max:255',
+            'nama_obat' => 'required|string|max:255',
+            'dosis' => 'required|string|max:255',
             'stok' => 'required|integer|min:0',
-            'harga' => 'required|numeric|min:0',
         ]);
 
         $obat->update($validatedData);

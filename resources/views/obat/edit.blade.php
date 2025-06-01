@@ -8,22 +8,25 @@
         <p style="color: #555;">Form Edit Obat</p>
     </div>
 
-    {{-- <form action="{{ route('dokter.store') }}" method="POST">
-        @csrf --}}
+   <form action="{{ route('obats.update', $dokter->id_dokter) }}" method="POST">
+        @csrf
+        @method('PUT')
 
         <div style="display: flex; gap: 40px;">
             <!-- Kolom Kiri -->
             <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
              <div>
-                <label for="no_dokter" style="font-weight: 300; margin-bottom: 6px; display: block;">No. Obat</label>
-                <input type="text" name="no_dokter" id="no_dokter" class="form-control"
-                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+                <label for="id_obat" style="font-weight: 300; margin-bottom: 6px; display: block;">No. Obat</label>
+                <input type="text" name="id_obat" id="id_obat" class="form-control"
+                    style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" 
+                    value="{{ old('id_dokter', $obat->id_obat) }}"/>
             </div>
 
               <div>
-                    <label for="nama_lengkap" style="font-weight: 300; margin-bottom: 6px; display: block;">Stok</label>
-                    <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
-                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+                    <label for="stok" style="font-weight: 300; margin-bottom: 6px; display: block;">Stok</label>
+                    <input type="text" name="stok" id="stok" class="form-control"
+                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" 
+                        value="{{ old('stok', $obat->stok) }}"/>
                 </div>
         
             </div>
@@ -31,21 +34,23 @@
             <!-- Kolom Kanan -->
             <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
                 <div>
-                    <label for="nama_lengkap" style="font-weight: 300; margin-bottom: 6px; display: block;">Nama Obat</label>
-                    <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
-                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+                    <label for="nama_obat" style="font-weight: 300; margin-bottom: 6px; display: block;">Nama Obat</label>
+                    <input type="text" name="nama_obat" id="nama_obat" class="form-control"
+                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" 
+                        value="{{ old('nama_obat', $obat->nama_obat) }}"/>
                 </div>
                 <div>
-                    <label for="no_str" style="font-weight: 300; margin-bottom: 6px; display: block;">Dosis</label>
-                    <input type="text" name="no_str" id="no_str" class="form-control"
-                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" />
+                    <label for="dosis" style="font-weight: 300; margin-bottom: 6px; display: block;">Dosis</label>
+                    <input type="text" name="dosis" id="dosis" class="form-control"
+                        style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" 
+                         value="{{ old('dosis', $obat->dosis) }}"/>
                 </div>
             </div>
         </div>
 
         <!-- Tombol -->
         <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px;">
-            <a href="#" class="btn"
+         <a href="{{ route('obats.index') }}" class="btn"
                 style="padding: 10px 20px; background-color: red; color: white; border-radius: 6px; text-decoration: none; font-size: 18px;">
                 Batal
             </a>
@@ -54,6 +59,6 @@
                 Simpan
             </button>
         </div>
-    {{-- </form> --}}
+    </form>
 </div>
 @endsection

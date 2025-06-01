@@ -13,9 +13,8 @@ class Obat extends Model
     protected $fillable = [
         'id_obat',
         'nama_obat',
-        'jenis_obat',
+        'dosis',
         'stok',
-        'harga',
     ];
 
     public $incrementing = false;

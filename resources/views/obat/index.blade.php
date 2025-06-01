@@ -10,7 +10,7 @@
         </div>
        <div style="display: flex; gap: 10px;">
             <input type="text" placeholder="Cari nama obat..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
-            <a href="{{route('obat.create')}}" style="padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+            <a href="{{route('obats.create')}}" style="padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
                  Tambah
             </a>
         </div>
@@ -27,18 +27,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style="padding: 10px; text-align: center;">1</td>
-                <td style="padding: 10px; text-align: center;">Budi Santoso</td>
-                <td style="padding: 10px; text-align: center;">34</td>
-                <td style="padding: 10px; text-align: center;">Laki-laki</td>
+              @forelse ($obats as $index => $obat)
+              <tr>
+                <td style="padding: 10px; text-align: center;">{{$index + 1}}</td>
+                <td style="padding: 10px; text-align: center;">{{$obat->nama_obat}}</td>
+                <td style="padding: 10px; text-align: center;">{{$obat->stok}}</td>
+                <td style="padding: 10px; text-align: center;">{{$obat->dosis}}</td>
                  <td style="padding: 10px; text-align: center;">
-                    <a href="{{route('obat.detail')}}"><i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i></a>
-                    <a href="{{route('obat.edit')}}"><i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i></a>
-                    <a href="#"><i class="fas fa-trash-alt" style="margin-left: 10px; color: red;"></i></a>
+                    <a href="{{route('obats.show')}}"><i class="fas fa-eye" style="margin-left: 10px; color:blue;"></i></a>
+                    <a href="{{route('obats.edit')}}"><i class="fas fa-edit" style="margin-left: 10px; color: #e6a100;"></i></a>
+                     <form action="{{ route('obats.destroy', $dokter->id_dokter) }}" method="POST" style="display:inline;"
+                                onsubmit="return confirm('Hapus data ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="outline: none; border: none; background: none; cursor: pointer;">
+                                    <i class="fas fa-trash-alt" style="margin-left: 10px; color: red;"></i>
+                                </button>
+                            </form>
                 </td>
             </tr>
-            <!-- Tambahkan data lainnya -->
+              @empty
+                    <tr>
+                        <td colspan="7">Belum ada data dokter.</td>
+                    </tr>
+                @endforelse
+            
+           
         </tbody>
     </table>
 </div>
