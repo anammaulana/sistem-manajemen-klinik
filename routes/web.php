@@ -12,12 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::middleware(['web','isLogin'])->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-
-    
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('pasiens', PasienController::class);
     Route::resource('dokters', DokterController::class);
     Route::resource('obats', ObatController::class);
